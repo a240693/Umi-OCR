@@ -17,6 +17,7 @@ Item {
 
     // 只读信息
     property int hideTB: 0 // 0为不隐藏，1为隐藏上边，2为隐藏下边
+    property alias splitterY: splitter.y // 分割线当前位置
 
     // ===============================================================
     id: doubleCC
@@ -30,11 +31,10 @@ Item {
         anchors.margins: size_.spacing
 
         property alias hideHeight: doubleCC.hideHeight
-        property alias splitterY: splitter.y // 分割线当前位置
         Component.onCompleted: { // 初始化分割线位置
             if(parent.initSplitterY <= 0)
                 parent.initSplitterY = 0.5 // 默认值0.5
-            Qt.callLater(toInit) // 延迟一个事件循环，再进行位置初始化
+            toInit()
         }
         property int bottomMax: height - splitter.height // 下边缘位置
 

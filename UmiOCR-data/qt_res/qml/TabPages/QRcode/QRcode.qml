@@ -187,7 +187,7 @@ TabPage {
     property bool running: false
     // 主区域：双栏面板
     DoubleRowLayout {
-        id: doubleRowLayout
+        id: doubleColumnLayout
         anchors.fill: parent
         initSplitterX: 0.5
 

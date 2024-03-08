@@ -30,8 +30,7 @@ TabPage {
     // 截图完毕
     function screenshotEnd(clipID) {
         popMainWindow()
-        if(!clipID) { // 截图取消
-            tabPage.callPy("ocrImgID", undefined, undefined)
+        if(!clipID) {
             return
         }
         const configDict = configsComp.getValueDict()
@@ -46,12 +45,10 @@ TabPage {
         const res = qmlapp.imageManager.getPaste()
         if(res.error) {
             qmlapp.popup.simple(qsTr("获取剪贴板异常"), res.error)
-            tabPage.callPy("ocrImgID", undefined, undefined)
             return
         }
         if(res.text) {
             qmlapp.popup.simple(qsTr("剪贴板中为文本"), res.text)
-            tabPage.callPy("ocrImgID", undefined, undefined)
             return
         }
         qmlapp.tab.showTabPageObj(tabPage) // 切换标签页
@@ -207,9 +204,9 @@ TabPage {
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.bottom: parent.bottom
-        anchors.leftMargin: doubleRowLayout.hideLR===1 ? size_.spacing : 0
-        width: doubleRowLayout.hideLR===1 ? size_.line * 2 : 0
-        visible: doubleRowLayout.hideLR===1
+        anchors.leftMargin: doubleColumnLayout.hideLR===1 ? size_.spacing : 0
+        width: doubleColumnLayout.hideLR===1 ? size_.line * 2 : 0
+        visible: doubleColumnLayout.hideLR===1
 
         Column {
             anchors.top: parent.top
@@ -255,7 +252,7 @@ TabPage {
     }
     // 主区域：双栏面板
     DoubleRowLayout {
-        id: doubleRowLayout
+        id: doubleColumnLayout
         anchors.left: leftCtrlPanel.right
         anchors.top: parent.top
         anchors.bottom: parent.bottom
